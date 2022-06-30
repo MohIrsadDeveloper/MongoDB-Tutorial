@@ -67,11 +67,11 @@ db.version()
                         1. db.createCollection("myCollectionName");
                         2. db.createCollection("myCollectionName", {capped : boolean, size : Size of Collection in Bytes, max : Number of MongoDb Documents that could be stored in the collection, only Integer })
                             ex. -->
-                                db.createCollection("testCollection", {capped : true, max : 4});
+                                db.createCollection("Users", {capped : true, max : 4});
                  <!-- Create Collection and insert document -->
             2. db.<database_name>.insert(<document>);
                 Eg. =>
-                    1.db.myCollectionName.insert({name : "mongodb"});
+                    1.db.Users.insert({name : "mongodb"});
 
     2. Show Collection => show collections;
         Steps =>
@@ -86,4 +86,50 @@ db.version()
 
 <!-- MongoDB Document - Structure and Sample Documents -->
 3. MongoDB Document => 
-    
+    <!-- Create Document -->
+    Create Document =>
+        1. db.<collectionName>.insertOne(<document>);
+            ex. ==>
+                db.Users.insert({name : "abdul"})
+        2.db.<collectionName>.insertMany([<document>]);
+            ex. ==>
+                db.Users.insertMany([{name : "asma"}, {name : "aiysha"}])
+
+    Steps ==>
+        1. use tutorialkart
+        2. db.Users.insertOne(<document>)
+
+    <!-- Show Document -->
+    Show Documents =>
+        1. db.<collectionName>.find();
+           db.<collectionName>.find({});
+            ex. ==>
+                db.Users.find();
+        2.db.<collectionName>.find().pretty(); <!-- It shows is prettier format or readable format. -->
+            ex. ==>
+                db.Users.find().pretty();
+        <!-- Show as Coditional Criteria -->
+        3. db.<collectionName>.find({<criteria>})
+            ex. ==>
+                db.Users.find({name: "abdul"});
+                    <!-- or -->
+        3. db.<collectionName>.find(criteria);
+            ex. ==>
+                criteria = {name : "asma"}
+                db.Users.find(criteria);
+        <!-- find based on projection -->
+        4. Projection mean find the documents and show only particular fields, if we want that field give projection_value as 1 otherwise to hide give projection_value as 0.
+            ex. ==>
+                db.Users.find({}, {name : 1, _id : 0})
+
+    <!-- Delete Document -->
+
+    <!-- Update Document -->
+    Delete Document =>
+        1. db.<collectionName>.update(<criteria>, <update>, <options>);
+            ex. =>
+                db.Users.update({name: "abdul"}, {name : "abdul", email : "abdul@gmail.com, age : 16})
+        2.db.<collectionName>.update(<criteria>, <$set:<update>>, <multi : true>)
+            ex. =>
+                db.Users.update({location : "mumbai"}, {$set: {bonus : 250}}) <!-- for single update -->
+                db.Users.update({location : "mumbai"}, {$set: {bonus : 250}}, {multi : true}) <!-- for multi update -->
