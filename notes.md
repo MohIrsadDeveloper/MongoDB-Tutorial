@@ -87,7 +87,7 @@ db.version()
 <!-- MongoDB Document - Structure and Sample Documents -->
 3. MongoDB Document => 
     <!-- Create Document -->
-    Create Document =>
+    1. Create Document =>
         1. db.<collectionName>.insertOne(<document>);
             ex. ==>
                 db.Users.insert({name : "abdul"})
@@ -100,7 +100,7 @@ db.version()
         2. db.Users.insertOne(<document>)
 
     <!-- Show Document -->
-    Show Documents =>
+    2. Show Documents =>
         1. db.<collectionName>.find();
            db.<collectionName>.find({});
             ex. ==>
@@ -122,10 +122,9 @@ db.version()
             ex. ==>
                 db.Users.find({}, {name : 1, _id : 0})
 
-    <!-- Delete Document -->
 
     <!-- Update Document -->
-    Delete Document =>
+    3. Update Document =>
         1. db.<collectionName>.update(<criteria>, <update>, <options>);
             ex. =>
                 db.Users.update({name: "abdul"}, {name : "abdul", email : "abdul@gmail.com, age : 16})
@@ -133,3 +132,71 @@ db.version()
             ex. =>
                 db.Users.update({location : "mumbai"}, {$set: {bonus : 250}}) <!-- for single update -->
                 db.Users.update({location : "mumbai"}, {$set: {bonus : 250}}, {multi : true}) <!-- for multi update -->
+
+
+    <!-- Delete Document -->
+    4. Delete Document =>
+        <!-- To delete all documents -->
+        1. db.<collectionName>.remove();
+                <!-- or -->
+           db.<collectionName>.remove({});
+            ex. =>
+                db.Users.remove() or db.Users.remove({});
+
+        <!-- To delete on certain criteria -->
+        2. db.<collectionName>.remove(<criteria>); <!-- remove all based on criteria -->
+            ex. =>
+                db.Users.remove({location : "mumbai"});
+
+        2. db.<collectionName>.remove(<criteria>, JUST_ONE); <!-- delete one based on criteria -->
+            ex. =>
+                db.Users.remove({location : "mumbai"}, 1);
+
+    
+    <!-- Limit Documents -->
+    5. Limit Document =>
+        <!-- Fetch all document  -->
+        1. db.<collectionName>.find().limit()
+            ex. =>
+                db.Users.find().limit();
+
+        <!-- Fetch certain limit document -->
+        2. db.<collectionName>.find().limit(N)
+            ex. =>
+                db.Users.find().limit(2);
+
+    <!-- Skip Documents -->
+    6. Skip Documents =>
+        <!-- Fetch all document zero skip -->
+        1. db.<collectionName>.find().skip();
+            ex. =>
+                db.Users.find().skip();
+
+        <!-- Fetch with skip number -->
+        2. db.<collectionName>.find().skip(2);
+            ex. =>
+                db.Users.find().skip(2);
+
+        <!-- Fetch with skip and limit number -->
+        3.db.<collectionName>.find().skip(2).limit(2);
+            ex. =>
+                db.Users.find().skip(2).limit(2);
+
+    7. Sort Document => Sort method take 1 or -1,
+                        1 is for ascending or incresing order
+                        -1 is for descending or decresing order
+        <!-- Sort with out any condition -->
+        1. db.<collectionName>.find().sort();
+            ex. =>
+                db.Users.find().sort();
+
+        <!-- Sort with one field -->
+        2. db.<collectionName>.find().sort({age : 1}) <!-- for ascending order -->
+           db.<collectionName>.find().sort({age : -1}) <!-- for descending order -->
+
+        <!-- Sort with more then one field -->
+        3. db.<collectionName>.find().sort({age : 1, name : 1});
+           db.<collectionName>.find().sort({age : 1, name : -1});
+
+4. MongoDB Aggregation Pipeline =>
+    
